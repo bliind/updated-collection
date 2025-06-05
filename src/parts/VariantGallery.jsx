@@ -1,7 +1,8 @@
 import { useEffect, useMemo } from "react";
 import VariantCard from "./VariantCard";
+import PlaceholderCard from "./PlaceholderCard";
 
-function VariantGallery({ cards, searchTerm, setFilterCount }) {
+function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
     const sanitizeText = (text) => {
         try {
             return text.replace(/[^0-9a-z]/gi, '').toLowerCase();
@@ -37,9 +38,15 @@ function VariantGallery({ cards, searchTerm, setFilterCount }) {
 
     return (
         <div className="d-flex flex-wrap w-100 ms-auto justify-content-center align-items-center pt-1 overflow-auto">
-            {filteredCards.map((card) => (
-                <VariantCard key={card.id} card={card} />
-            ))}
+            {loading ? (
+                [...Array(50)].map((_, index) => <PlaceholderCard key={index} />)
+            ) : error ? (
+                <p className="text-danger">Error: {error}</p>
+            ) :
+                filteredCards.map((card) => (
+                    <VariantCard key={card.id} card={card} />
+                )
+            )}
         </div>
     );
 }
