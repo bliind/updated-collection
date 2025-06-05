@@ -1,0 +1,19 @@
+.w-15 {
+  width: 15% !important;
+}
+.border-hover-white:hover {
+  --bs-border-opacity: 1;
+  border-color: rgba(var(--bs-white-rgb),var(--bs-border-opacity)) !important;
+}
+.border-hover-info:hover {
+  --bs-border-opacity: 1;
+  border-color: rgba(var(--bs-info-rgb),var(--bs-border-opacity)) !important;
+}
+
+.bg-darker {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.top-10 {
+  top: 10% !important;
+}
