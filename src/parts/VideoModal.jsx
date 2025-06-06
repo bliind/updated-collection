@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router";
+import { useUser } from "../hooks/useUser";
 
 function VideoModal({ card }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    const { editor } = useUser();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!['',null].includes(card.video_link)) {
@@ -30,7 +35,7 @@ function VideoModal({ card }) {
                         {card.tags && (
                             <h5 className="py-1 my-0 fst-italic">{card.tags.replaceAll(',', ' ')}</h5>
                         )}
-                        <h5 className="py-1 my-0"><i class="bi bi-brush"></i> {card.artist_name}</h5>
+                        <h5 className="py-1 my-0"><i className="bi bi-brush"></i> {card.artist_name}</h5>
                     </div>
                     <div className="modal-body bg-darkerer rounded">
                         {error && (
@@ -61,6 +66,11 @@ function VideoModal({ card }) {
                             <img className="rounded-top card-img-top" src={`https://snaptracker.me/collection/images/${card.image_link}`} />
                         </>)}
                     </div>
+                    {editor === "1" && (
+                        <div className="modal-footer justify-content-center">
+                            <a href="#" onClick={() => navigate(`/edit/${card.id}`)} data-bs-toggle="modal" data-bs-target="#mainModal">Edit</a>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
