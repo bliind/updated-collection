@@ -4,14 +4,16 @@ function VariantCard({ card, setModalCard }) {
 
     return (
         <div className="m-2 align-self-start">
-            <div className="card text-center position-relative" style={{ width: '16rem' }}>
+            <div
+                className="card text-center position-relative"
+                style={{ width: '16rem' }}
+                onClick={() => setModalCard(card)}
+                data-bs-toggle="modal"
+                data-bs-target="#mainModal">
                 <img
                     loading="lazy"
                     className="rounded-top card-img-top"
-                    src={imgSrc}
-                    onClick={() => setModalCard(card)}
-                    data-bs-toggle="modal"
-                    data-bs-target="#mainModal" />
+                    src={imgSrc} />
 
                 <div className="card-body py-2 bg-darker rounded-bottom">
                     <h6 className="card-title my-0 py-0 fw-bold">{card.card_name}</h6>
