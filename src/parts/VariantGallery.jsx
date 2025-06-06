@@ -18,7 +18,7 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
         const sanitizedSearchTerm = sanitizeText(searchTerm);
         const keysToCheck = ['card_name', 'variant_name', 'artist_name', 'tags'];
 
-        return cards.filter((card) => {
+        const filtered = cards.filter((card) => {
             if (!card.video_link && 'needed'.includes(sanitizedSearchTerm)) {
                 return true;
             }
@@ -33,6 +33,10 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
                 }
             }
         });
+
+        filtered.sort((a, b) => a.card_name.localeCompare(b.card_name));
+
+        return filtered;
     }, [searchTerm, cards]);
 
     useEffect(() => {
