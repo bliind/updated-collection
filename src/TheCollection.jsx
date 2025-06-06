@@ -56,7 +56,7 @@ function TheCollection() {
                             <Link to="/logout" className={linkClass}>Logout</Link>
                         </div>
                     ) : (
-                        <a href="#" className={linkClass}>Login</a>
+                        <a href="/login" className={linkClass} style={{ marginTop: '-0.75rem' }}>Login</a>
                     )}
                 </div>
                 <VariantFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} filterCount={filterCount} />

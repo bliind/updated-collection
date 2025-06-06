@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import { UserProvider } from './context/UserContext';
 import TheCollection from './TheCollection';
 import VariantForm from './VariantForm';
+import LoginForm from './LoginForm';
+import Logout from './Logout';
 
 function App() {
   return (
@@ -11,8 +13,10 @@ function App() {
         <UserProvider>
           <Routes>
             <Route path="/" element={<TheCollection />} />
-            <Route path="/add" element={<VariantForm card={{}} />} />
-            <Route path="/edit/:id" element={<VariantForm card={{}} />} />
+            <Route path="/add" element={<VariantForm />} />
+            <Route path="/edit/:id" element={<VariantForm />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/logout" element={<Logout />} />
           </Routes>
         </UserProvider>
       </Suspense>

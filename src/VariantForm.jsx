@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "./hooks/useUser";
 import { Link, useNavigate, useParams } from "react-router";
 import TextField from "./parts/form/TextField";
+import FormControls from "./parts/form/FormControls";
 
 function VariantForm() {
     const [cardName, setCardName] = useState('');
@@ -157,15 +158,8 @@ function VariantForm() {
                     <TextField name="tags" label="Tags" value={tags} fieldErrors={fieldErrors}
                         onChange={(event) => setTags(event.target.value)} />
 
-                    <div className="form-group py-3">
-                        <button type="submit" className={`btn btn-success me-3 ${loading && 'disabled'}`} onClick={handleSubmit}>
-                            {loading ? (<>
-                                <span className="spinner-border spinner-border-sm" aria-hidden="true"></span>
-                                <span className="visually-hidden" role="status">Loading...</span>
-                            </>) : (id ? 'Edit' : 'Add') + ' Variant'}
-                        </button>
-                        <button type="reset" className="btn btn-danger" onClick={resetForm}>Reset Form</button>
-                    </div>
+                    <FormControls loading={loading} resetForm={resetForm} handleSubmit={handleSubmit}
+                        label={(id ? 'Edit' : 'Add') + ' Variant'} />
                 </div>
             </div>
         </div>

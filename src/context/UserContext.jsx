@@ -8,15 +8,21 @@ export const UserContext = createContext({
 
 const fetchStoredValue = (keyName) => {
     try {
-        return localStorage.getItem(keyName);
+        const storedValue = localStorage.getItem(keyName);
+        return storedValue !== null ? JSON.parse(storedValue) : null;
     } catch (error) {
-        console.error(`Failed to read ${keyName} from localStorage:`, error);
+        try {
+            const storedValue = localStorage.getItem(keyName);
+            return storedValue;
+        } catch(error) {
+            console.error(`Failed to read ${keyName} from localStorage:`, error);
+        }
     }
 }
 
 const storeValue = (keyName, value) => {
     try {
-        localStorage.setItem(keyName, value);
+        localStorage.setItem(keyName, JSON.stringify(value));
     } catch (error) {
         console.error(`Failed to write ${keyName} to localStorage:`, error);
     }
@@ -33,8 +39,8 @@ export function UserProvider({ children }) {
         storeValue('token', token);
     }, [username, editor, token]);
 
-    const login = ({name, editor, token}) => {
-        setUsername(name);
+    const login = ({username, editor, token}) => {
+        setUsername(username);
         setEditor(editor);
         setToken(token);
     };
