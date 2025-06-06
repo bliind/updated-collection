@@ -1,11 +1,18 @@
-function VariantCard({card}) {
+function VariantCard({ card, setModalCard }) {
     const imgSrc = `https://snaptracker.me/collection/images/${card.image_link}`
     const badgeStyle = 'position-absolute badge rounded-pill border card-text p-2';
 
     return (
         <div className="m-2 align-self-start">
             <div className="card text-center position-relative" style={{ width: '16rem' }}>
-                <img loading="lazy" className="rounded-top card-img-top" src={imgSrc} />
+                <img
+                    loading="lazy"
+                    className="rounded-top card-img-top"
+                    src={imgSrc}
+                    onClick={() => setModalCard(card)}
+                    data-bs-toggle="modal"
+                    data-bs-target="#mainModal" />
+
                 <div className="card-body py-2 bg-darker rounded-bottom">
                     <h6 className="card-title my-0 py-0 fw-bold">{card.card_name}</h6>
                     <p className="card-text my-0 py-0">{card.variant_name ? card.variant_name : card.artist_name }</p>

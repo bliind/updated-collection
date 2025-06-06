@@ -13,6 +13,9 @@
 .bg-darker {
   background: rgba(0, 0, 0, 0.5);
 }
+.bg-darkerer {
+  background: rgba(0, 0, 0, 0.7);
+}
 
 .top-10 {
   top: 10% !important;
