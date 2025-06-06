@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { getCollection } from "./api/collection";
 import VariantFilter from "./parts/VariantFilter";
 import VariantGallery from "./parts/VariantGallery";
+import CreditsModal from "./parts/CreditsModal";
 
 function TheCollection() {
     // variant loading
@@ -36,10 +37,17 @@ function TheCollection() {
     }, []);
 
     return (
-        <div className="container-fluid d-flex flex-column h-100 py-3">
-            <VariantFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} filterCount={filterCount} />
-            <VariantGallery cards={cards} loading={loading} error={error} searchTerm={searchTerm} setFilterCount={setFilterCount} />
-        </div>
+        <>
+            <div className="container-fluid d-flex flex-column h-100 py-3">
+                <div className="d-flex">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#creditsModal">Credits</a>
+                    <VariantFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} filterCount={filterCount} />
+                    <a href="#">Login</a>
+                </div>
+                <VariantGallery cards={cards} loading={loading} error={error} searchTerm={searchTerm} setFilterCount={setFilterCount} />
+            </div>
+            <CreditsModal />
+        </>
     );
 }
 
