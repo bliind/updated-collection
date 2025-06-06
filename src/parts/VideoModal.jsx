@@ -59,6 +59,7 @@ function VideoModal({ card }) {
                             onCanPlayThrough={handleVideoLoad}
                             onError={handleVideoError}
                             alt="Variant Video"
+                            data-bs-toggle="modal" data-bs-target="#mainModal"
                         />)}
 
                         {card && ['',null].includes(card.video_link) && (<>

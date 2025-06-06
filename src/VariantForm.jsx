@@ -124,7 +124,7 @@ function VariantForm() {
 
     return (<>
         <div className="container-fluid pt-1">
-            <Link to="/" className="link-light link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Back</Link>
+            <Link to="/collection2/" className="link-light link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Back</Link>
         </div>
         <div className="container py-3">
             <div className="row">
