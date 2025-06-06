@@ -40,9 +40,9 @@ function TheCollection() {
         <>
             <div className="container-fluid d-flex flex-column h-100 py-3">
                 <div className="d-flex">
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#creditsModal">Credits</a>
+                    <a href="#" className="link-light link-underline link-underline-opacity-0 link-underline-opacity-75-hover" data-bs-toggle="modal" data-bs-target="#creditsModal">Credits</a>
                     <VariantFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} filterCount={filterCount} />
-                    <a href="#">Login</a>
+                    <a href="#" className="link-light link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Login</a>
                 </div>
                 <VariantGallery cards={cards} loading={loading} error={error} searchTerm={searchTerm} setFilterCount={setFilterCount} />
             </div>

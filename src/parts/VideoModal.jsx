@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
-function Modal({ card }) {
+function VideoModal({ card }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        setLoading(true);
-        setError(null);
+        if (!['',null].includes(card.video_link)) {
+            setLoading(true);
+            setError(null);
+        }
     }, [card]);
 
     const handleVideoLoad = () => {
@@ -43,7 +45,7 @@ function Modal({ card }) {
                             </svg>
                         }
 
-                        {card && card.video_link !== '' && (<video
+                        {card && !(['',null].includes(card.video_link)) && (<video
                             src={card.video_link}
                             loop={true}
                             autoPlay={true}
@@ -53,6 +55,11 @@ function Modal({ card }) {
                             onError={handleVideoError}
                             alt="Variant Video"
                         />)}
+
+                        {card && ['',null].includes(card.video_link) && (<>
+                            <h2 className="text-center fst">No video!</h2>
+                            <img className="rounded-top card-img-top" src={`https://snaptracker.me/collection/images/${card.image_link}`} />
+                        </>)}
                     </div>
                 </div>
             </div>
@@ -60,4 +67,4 @@ function Modal({ card }) {
     )
 }
 
-export default Modal;
+export default VideoModal;

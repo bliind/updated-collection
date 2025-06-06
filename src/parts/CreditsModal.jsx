@@ -18,7 +18,7 @@ function CreditsModal() {
                         <p className="pt-3 mb-0 fw-bold">Huge thank you to major contributors:</p>
                         <div className="pt-0 d-flex flex-wrap justify-content-center">
                             {contributors.map((contributor) => (
-                                <div className="p-2">{contributor}</div>
+                                <div key={contributor} className="p-2">{contributor}</div>
                             ))}
                         </div>
                     </div>

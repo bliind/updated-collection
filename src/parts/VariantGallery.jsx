@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import VariantCard from "./VariantCard";
 import PlaceholderCard from "./PlaceholderCard";
-import Modal from "./Modal";
+import VideoModal from "./VideoModal";
 
 function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
     const [modalCard, setModalCard] = useState('');
@@ -52,7 +52,7 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
                     )
                 )}
             </div>
-            <Modal card={modalCard} />
+            <VideoModal card={modalCard} />
         </>
     );
 }
