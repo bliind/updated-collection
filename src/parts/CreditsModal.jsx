@@ -9,10 +9,10 @@ function CreditsModal() {
                         <h5 className="py-1 my-0">Credits</h5>
                     </div>
                     <div className="modal-body bg-darker rounded justify-content-center text-center rounded">
-                        <h3>Creator of <span className="fst-italic">The Collection</span></h3>
+                        <h3>Creator of <span className="fst-italic">The Collection</span> Spreadsheet</h3>
                         <h3 className="fw-bold">Plixie</h3>
 
-                        <h3>Website Conversion / Maintainer</h3>
+                        <h3 className="pt-3">Website Conversion / Maintainer</h3>
                         <h3 className="fw-bold">./swn</h3>
 
                         <p className="pt-3 mb-0 fw-bold">Huge thank you to major contributors:</p>

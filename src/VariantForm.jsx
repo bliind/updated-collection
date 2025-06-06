@@ -47,7 +47,8 @@ function VariantForm() {
         setFieldErrors((prev) => [])
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         setLoading(true);
         setFieldErrors((prev) => [])
 
@@ -130,36 +131,38 @@ function VariantForm() {
                 <div className="col-6 offset-3">
                     <h3 className="text-center">{id ? 'Edit' : 'Add'} Card</h3>
 
-                    <TextField name="card_name" label="Card Name" value={cardName} fieldErrors={fieldErrors}
-                        onChange={(event) => setCardName(event.target.value)} />
-                    <TextField name="variant_name" label="Variant Name" value={variantName} fieldErrors={fieldErrors}
-                        onChange={(event) => setVariantName(event.target.value)} />
-                    <TextField name="artist_name" label="Artist Name" value={artistName} fieldErrors={fieldErrors}
-                        onChange={(event) => setArtistName(event.target.value)} />
+                    <form onSubmit={handleSubmit}>
+                        <TextField name="card_name" label="Card Name" value={cardName} fieldErrors={fieldErrors}
+                            onChange={(event) => setCardName(event.target.value)} />
+                        <TextField name="variant_name" label="Variant Name" value={variantName} fieldErrors={fieldErrors}
+                            onChange={(event) => setVariantName(event.target.value)} />
+                        <TextField name="artist_name" label="Artist Name" value={artistName} fieldErrors={fieldErrors}
+                            onChange={(event) => setArtistName(event.target.value)} />
 
-                    <div className="form-group pt-3">
-                        <label className="form-label">Card Image</label>
-                        <input type="file"
-                            className="form-control"
-                            name="upload_image"
-                            id="upload_image"
-                            onChange={handleFileChange} />
-                        {image && (
-                            <div className="text-center py-1">
-                                <img src={URL.createObjectURL(image)} style={{ width: '12rem' }} />
-                            </div>
-                        )}
-                    </div>
+                        <div className="form-group pt-3">
+                            <label className="form-label">Card Image</label>
+                            <input type="file"
+                                className="form-control"
+                                name="upload_image"
+                                id="upload_image"
+                                onChange={handleFileChange} />
+                            {image && (
+                                <div className="text-center py-1">
+                                    <img src={URL.createObjectURL(image)} style={{ width: '12rem' }} />
+                                </div>
+                            )}
+                        </div>
 
-                    <TextField name="image_link" label="Image Filename" value={imageLink} fieldErrors={fieldErrors}
-                        onChange={(event) => setImageLink(event.target.value)} />
-                    <TextField name="video_link" label="Video Link" value={videoLink} fieldErrors={fieldErrors}
-                        onChange={(event) => setVideoLink(event.target.value)} />
-                    <TextField name="tags" label="Tags" value={tags} fieldErrors={fieldErrors}
-                        onChange={(event) => setTags(event.target.value)} />
+                        <TextField name="image_link" label="Image Filename" value={imageLink} fieldErrors={fieldErrors}
+                            onChange={(event) => setImageLink(event.target.value)} />
+                        <TextField name="video_link" label="Video Link" value={videoLink} fieldErrors={fieldErrors}
+                            onChange={(event) => setVideoLink(event.target.value)} />
+                        <TextField name="tags" label="Tags" value={tags} fieldErrors={fieldErrors}
+                            onChange={(event) => setTags(event.target.value)} />
 
-                    <FormControls loading={loading} resetForm={resetForm} handleSubmit={handleSubmit}
-                        label={(id ? 'Edit' : 'Add') + ' Variant'} />
+                        <FormControls loading={loading} resetForm={resetForm} handleSubmit={handleSubmit}
+                            label={(id ? 'Edit' : 'Add') + ' Variant'} />
+                    </form>
                 </div>
             </div>
         </div>
