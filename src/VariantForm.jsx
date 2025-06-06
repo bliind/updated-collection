@@ -86,7 +86,7 @@ function VariantForm() {
                 }
             } else {
                 // success
-                navigate('/')
+                navigate('/collection2/')
             }
         })
         .finally(() => setLoading(false));
@@ -94,7 +94,7 @@ function VariantForm() {
 
     useEffect(() => {
         if (editor !== "1") {
-            navigate('/')
+            navigate('/collection2/')
             return;
         }
     }, []);

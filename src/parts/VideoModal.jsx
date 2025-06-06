@@ -69,7 +69,7 @@ function VideoModal({ card }) {
                     </div>
                     {editor === "1" && (
                         <div className="modal-footer justify-content-center">
-                            <a href="#" onClick={() => navigate(`/edit/${card.id}`)} data-bs-toggle="modal" data-bs-target="#mainModal">Edit</a>
+                            <a href="#" onClick={() => navigate(`/collection2/edit/${card.id}`)} data-bs-toggle="modal" data-bs-target="#mainModal">Edit</a>
                         </div>
                     )}
                 </div>
