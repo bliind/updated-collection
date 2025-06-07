@@ -28,6 +28,7 @@ function TheCollection() {
             setError(null);
             try {
                 const data = await getCollection();
+                data.sort((a, b) => a.card_name.localeCompare(b.card_name))
                 setCards(data);
             } catch(err) {
                 setError(err.message || 'Failed to fetch variants');
