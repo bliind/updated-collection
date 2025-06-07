@@ -53,11 +53,11 @@ function TheCollection() {
                     {username ? (
                         <div className="d-flex flex-column text-end" style={{ marginTop: '-0.75rem' }}>
                             <p className="py-0 my-0">{username}</p>
-                            <Link to="/collection2/add" className={linkClass}>Add</Link>
-                            <Link to="/collection2/logout" className={linkClass}>Logout</Link>
+                            <Link to="/collection/add" className={linkClass}>Add</Link>
+                            <Link to="/collection/logout" className={linkClass}>Logout</Link>
                         </div>
                     ) : (
-                        <a href="/collection2/login" className={linkClass} style={{ marginTop: '-0.75rem' }}>Login</a>
+                        <a href="/collection/login" className={linkClass} style={{ marginTop: '-0.75rem' }}>Login</a>
                     )}
                 </div>
                 <VariantFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} filterCount={filterCount} />

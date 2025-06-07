@@ -14,7 +14,7 @@ function Logout() {
             <div className="row">
                 <div className="col text-center">
                     <h2>{username ? 'You are still logged in...' : 'You have been logged out!'}</h2>
-                    <Link to="/collection2/" className="link-light link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Go Home</Link>
+                    <Link to="/collection/" className="link-light link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Go Home</Link>
                 </div>
             </div>
         </div>

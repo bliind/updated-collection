@@ -12,11 +12,11 @@ function App() {
       <Suspense fallback={<div className="container py-5"><h1>Loading...</h1></div>}>
         <UserProvider>
           <Routes>
-            <Route path="/collection2/" element={<TheCollection />} />
-            <Route path="/collection2/add" element={<VariantForm />} />
-            <Route path="/collection2/edit/:id" element={<VariantForm />} />
-            <Route path="/collection2/login" element={<LoginForm />} />
-            <Route path="/collection2/logout" element={<Logout />} />
+            <Route path="/collection/" element={<TheCollection />} />
+            <Route path="/collection/add" element={<VariantForm />} />
+            <Route path="/collection/edit/:id" element={<VariantForm />} />
+            <Route path="/collection/login" element={<LoginForm />} />
+            <Route path="/collection/logout" element={<Logout />} />
           </Routes>
         </UserProvider>
       </Suspense>
