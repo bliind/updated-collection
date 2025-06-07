@@ -21,7 +21,7 @@ const VariantCard = React.memo(({ card, setModalCard }) => {
                 )}
                 <img loading="lazy" src={imgSrc}
                     className={`${loading && 'visually-hidden'} rounded-top card-img-top`}
-                    onLoad={() => setLoading(false)} />
+                    onLoad={() => setLoading(false)} onError={() => setLoading(false)} />
 
                 <div className="card-body py-2 bg-darker rounded-bottom">
                     <h6 className="card-title my-0 py-0 fw-bold">{card.card_name}</h6>

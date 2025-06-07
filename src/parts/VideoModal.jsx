@@ -14,6 +14,12 @@ function VideoModal({ card }) {
             setLoading(true);
             setError(null);
         }
+
+        // i don't know why but it still sets loading to true so we
+        // can just set it to false again if we don't have a video
+        if (['',null].includes(card.video_link)) {
+            setLoading(false);
+        }
     }, [card]);
 
     const handleVideoLoad = () => {
@@ -29,7 +35,7 @@ function VideoModal({ card }) {
     return (
         <div className="modal modal-lg fade" id="mainModal" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content border-info">
+                <div className="modal-content border-info" data-bs-toggle="modal" data-bs-target="#mainModal">
                     <div className="modal-title py-2 text-center flex-column rounded">
                         <h5 className="py-1 my-0">{card.variant_name !== card.artist_name && card.variant_name} {card.card_name}</h5>
                         {card.tags && (
@@ -59,7 +65,6 @@ function VideoModal({ card }) {
                             onCanPlayThrough={handleVideoLoad}
                             onError={handleVideoError}
                             alt="Variant Video"
-                            data-bs-toggle="modal" data-bs-target="#mainModal"
                         />)}
 
                         {card && ['',null].includes(card.video_link) && (<>

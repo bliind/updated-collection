@@ -4,7 +4,7 @@ function CreditsModal() {
     return (
         <div className="modal modal-lg fade" id="creditsModal" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content border-warning">
+                <div className="modal-content border-warning" data-bs-toggle="modal" data-bs-target="#creditsModal">
                     <div className="modal-title bg-darker py-2 text-center rounded">
                         <h5 className="py-1 my-0">Credits</h5>
                     </div>
