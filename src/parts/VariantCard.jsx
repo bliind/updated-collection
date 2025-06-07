@@ -1,6 +1,10 @@
-function VariantCard({ card, setModalCard }) {
+import React, { useState } from "react";
+
+const VariantCard = React.memo(({ card, setModalCard }) => {
     const imgSrc = `https://snaptracker.me/collection/images/${card.image_link}`
     const badgeStyle = 'position-absolute badge rounded-pill border card-text p-2';
+
+    const [loading, setLoading] = useState(true);
 
     return (
         <div className="m-2 align-self-start">
@@ -10,7 +14,14 @@ function VariantCard({ card, setModalCard }) {
                 data-bs-toggle="modal"
                 data-bs-target="#mainModal"
             >
-                <img loading="lazy" className="rounded-top card-img-top" src={imgSrc} />
+                {loading && (
+                    <div className="spinner-border my-5 mx-auto" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                )}
+                <img loading="lazy" src={imgSrc}
+                    className={`${loading && 'visually-hidden'} rounded-top card-img-top`}
+                    onLoad={() => setLoading(false)} />
 
                 <div className="card-body py-2 bg-darker rounded-bottom">
                     <h6 className="card-title my-0 py-0 fw-bold">{card.card_name}</h6>
@@ -31,6 +42,6 @@ function VariantCard({ card, setModalCard }) {
             </div>
         </div>
     )
-}
+});
 
 export default VariantCard;

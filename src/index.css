@@ -24,24 +24,29 @@
 /* card element */
 .variant-card {
   width: 16rem;
+  min-height: 19.75rem;
 }
 @media only screen and (max-width: 1920px) {
   .variant-card {
     width: 14rem;
+    min-height: 17.28rem;
   }
 }
 @media only screen and (max-width: 1111px) {
   .variant-card {
     width: 12rem;
+    min-height: 14.81rem;
   }
 }
 @media only screen and (max-width: 855px) {
   .variant-card {
     width: 8rem;
+    min-height: 9.875rem;
   }
 }
 @media only screen and (max-width: 720px) {
   .variant-card {
     width: 6rem;
+    min-height: 7.4rem;
   }
 }
