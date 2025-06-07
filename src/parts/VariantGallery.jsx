@@ -8,7 +8,7 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
 
     const sanitizeText = (text) => {
         try {
-            return text.replace(/[^0-9a-z]/gi, '').toLowerCase();
+            return text.replace(/[^0-9a-z ]/gi, '').toLowerCase();
         } catch(err) {
             return '';
         }
@@ -34,9 +34,7 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
             }
         });
 
-        filtered.sort((a, b) => a.card_name.localeCompare(b.card_name));
-
-        return filtered;
+        return filtered
     }, [searchTerm, cards]);
 
     useEffect(() => {
