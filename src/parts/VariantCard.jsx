@@ -1,10 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const VariantCard = React.memo(({ card, setModalCard }) => {
     const imgSrc = `https://snaptracker.me/collection/images/${card.image_link}`
     const badgeStyle = 'position-absolute badge rounded-pill border card-text p-2';
 
     const [loading, setLoading] = useState(true);
+    const [style, setStyle] = useState({opacity: 1});
+
+    useEffect(() => {
+        if (loading) {
+            setStyle({opacity: 0});
+        } else {
+            setStyle({opacity: 1});
+        }
+    }, [loading])
 
     return (
         <div className="m-2 align-self-start">
@@ -20,7 +29,8 @@ const VariantCard = React.memo(({ card, setModalCard }) => {
                     </div>
                 )}
                 <img loading="lazy" src={imgSrc}
-                    className={`${loading && 'visually-hidden'} rounded-top card-img-top`}
+                    className="rounded-top card-img-top"
+                    style={style}
                     onLoad={() => setLoading(false)} onError={() => setLoading(false)} />
 
                 <div className="card-body py-2 bg-darker rounded-bottom">
