@@ -9,7 +9,7 @@ const VariantCard = React.memo(({ card, setModalCard }) => {
 
     useEffect(() => {
         if (loading) {
-            setStyle({opacity: 0});
+            setStyle({opacity: 0, height: 0});
         } else {
             setStyle({opacity: 1});
         }
@@ -23,16 +23,15 @@ const VariantCard = React.memo(({ card, setModalCard }) => {
                 data-bs-toggle="modal"
                 data-bs-target="#mainModal"
             >
+                <img loading="lazy" src={imgSrc}
+                    className="rounded-top card-img-top"
+                    style={style}
+                    onLoad={() => setLoading(false)} onError={() => setLoading(false)} />
                 {loading && (
                     <div className="spinner-border my-5 mx-auto" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </div>
                 )}
-                <img loading="lazy" src={imgSrc}
-                    className="rounded-top card-img-top"
-                    style={style}
-                    onLoad={() => setLoading(false)} onError={() => setLoading(false)} />
-
                 <div className="card-body py-2 bg-darker rounded-bottom">
                     <h6 className="card-title my-0 py-0 fw-bold">{card.card_name}</h6>
                     <p className="card-text my-0 py-0">{card.variant_name ? card.variant_name : card.artist_name }</p>
