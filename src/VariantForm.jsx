@@ -101,6 +101,8 @@ function VariantForm() {
 
     useEffect(() => {
         if (!id) return;
+
+        setLoading(true);
         const formData = new FormData();
         formData.append('token', token);
         fetch(`https://snaptracker.me/collection/api/get/${id}`, {
@@ -120,6 +122,7 @@ function VariantForm() {
                 console.error('Error fetching variant data:', error);
             }
         })
+        .finally(() => setLoading(false))
     }, [id]);
 
     return (<>
@@ -133,11 +136,11 @@ function VariantForm() {
 
                     <form onSubmit={handleSubmit}>
                         <TextField name="card_name" label="Card Name" value={cardName} fieldErrors={fieldErrors}
-                            onChange={(event) => setCardName(event.target.value)} />
+                            onChange={(event) => setCardName(event.target.value)} loading={loading} />
                         <TextField name="variant_name" label="Variant Name" value={variantName} fieldErrors={fieldErrors}
-                            onChange={(event) => setVariantName(event.target.value)} />
+                            onChange={(event) => setVariantName(event.target.value)} loading={loading} />
                         <TextField name="artist_name" label="Artist Name" value={artistName} fieldErrors={fieldErrors}
-                            onChange={(event) => setArtistName(event.target.value)} />
+                            onChange={(event) => setArtistName(event.target.value)} loading={loading} />
 
                         <div className="form-group pt-3">
                             <label className="form-label">Card Image</label>
@@ -145,7 +148,8 @@ function VariantForm() {
                                 className="form-control"
                                 name="upload_image"
                                 id="upload_image"
-                                onChange={handleFileChange} />
+                                onChange={handleFileChange}
+                                disabled={loading} />
                             {image && (
                                 <div className="text-center py-1">
                                     <img src={URL.createObjectURL(image)} style={{ width: '12rem' }} />
@@ -154,11 +158,11 @@ function VariantForm() {
                         </div>
 
                         <TextField name="image_link" label="Image Filename" value={imageLink} fieldErrors={fieldErrors}
-                            onChange={(event) => setImageLink(event.target.value)} />
+                            onChange={(event) => setImageLink(event.target.value)} loading={loading} />
                         <TextField name="video_link" label="Video Link" value={videoLink} fieldErrors={fieldErrors}
-                            onChange={(event) => setVideoLink(event.target.value)} />
+                            onChange={(event) => setVideoLink(event.target.value)} loading={loading} />
                         <TextField name="tags" label="Tags" value={tags} fieldErrors={fieldErrors}
-                            onChange={(event) => setTags(event.target.value)} />
+                            onChange={(event) => setTags(event.target.value)} loading={loading} />
 
                         <FormControls loading={loading} resetForm={resetForm} handleSubmit={handleSubmit}
                             label={(id ? 'Edit' : 'Add') + ' Variant'} />

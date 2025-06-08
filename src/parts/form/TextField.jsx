@@ -1,4 +1,4 @@
-function TextField({ name, label, value, onChange, fieldErrors }) {
+function TextField({ name, label, value, onChange, fieldErrors, loading }) {
     return (
         <div className="form-group py-3">
             <label className="form-label">{label}</label>
@@ -6,8 +6,9 @@ function TextField({ name, label, value, onChange, fieldErrors }) {
                 className={`form-control ${fieldErrors.includes(name) && 'border-danger'}`}
                 name={name}
                 id={name}
-                value={value}
-                onChange={onChange} />
+                value={value === null ? '' : value}
+                onChange={onChange}
+                disabled={loading} />
         </div>
     )
 }
