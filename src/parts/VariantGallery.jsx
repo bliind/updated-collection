@@ -16,7 +16,7 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
 
     const filteredCards = useMemo(() => {
         const sanitizedSearchTerm = sanitizeText(searchTerm);
-        const searchTerms = sanitizedSearchTerm.split(' ');
+        const searchTerms = sanitizedSearchTerm.split(' ').filter(term => term);
 
         const filtered = cards.filter((card) => {
             const queryable = [card.card_name, card.artist_name];
@@ -26,15 +26,7 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
 
             const checkString = sanitizeText(queryable.join(' '));
 
-            let match = true;
-            for (let searchTerm of searchTerms) {
-
-                if (!checkString.includes(searchTerm)) {
-                    match = false;
-                }
-            }
-
-            return match;
+            return searchTerms.every(searchTerm => checkString.includes(searchTerm));
         });
 
         return filtered
