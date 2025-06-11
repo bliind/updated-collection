@@ -16,22 +16,25 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
 
     const filteredCards = useMemo(() => {
         const sanitizedSearchTerm = sanitizeText(searchTerm);
-        const keysToCheck = ['card_name', 'variant_name', 'artist_name', 'tags'];
+        const searchTerms = sanitizedSearchTerm.split(' ');
 
         const filtered = cards.filter((card) => {
-            if (!card.video_link && 'needed'.includes(sanitizedSearchTerm)) {
-                return true;
+            const queryable = [card.card_name, card.artist_name];
+            if (card.variant_name) queryable.push(card.variant_name);
+            if (card.tags) queryable.push(card.tags);
+            if (!card.video_link) queryable.push('needed');
+
+            const checkString = sanitizeText(queryable.join(' '));
+
+            let match = true;
+            for (let searchTerm of searchTerms) {
+
+                if (!checkString.includes(searchTerm)) {
+                    match = false;
+                }
             }
 
-            for (let keyToCheck of keysToCheck) {
-                if (card[keyToCheck] && typeof card[keyToCheck] !== 'string') {
-                    return false;
-                }
-
-                if (sanitizeText(card[keyToCheck]).includes(sanitizedSearchTerm)) {
-                    return true;
-                }
-            }
+            return match;
         });
 
         return filtered
