@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { getCollection } from "./api/collection";
 import VariantFilter from "./parts/VariantFilter";
 import VariantGallery from "./parts/VariantGallery";
@@ -11,6 +11,7 @@ function TheCollection() {
     const [cards, setCards] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [creditsOpen, setCreditsOpen] = useState(false);
     const fetched = useRef(false);
 
     // filtering
@@ -44,11 +45,14 @@ function TheCollection() {
 
     const linkClass = 'link-light link-underline link-underline-opacity-0 link-underline-opacity-75-hover';
 
+    const openCreditsModal = useCallback(() => setCreditsOpen(true));
+    const closeCreditsModal = useCallback(() => setCreditsOpen(false));
+
     return (
         <>
             <div className="container-fluid d-flex flex-column h-100 py-3">
                 <div className="d-flex">
-                    <a href="#" className={linkClass} style={{ marginTop: '-0.75rem' }} data-bs-toggle="modal" data-bs-target="#creditsModal">Credits</a>
+                    <a href="#" className={linkClass} style={{ marginTop: '-0.75rem' }} onClick={openCreditsModal}>Credits</a>
                     <h1 className="flex-grow-1 text-center fw-bold">The Collection</h1>
                     {username ? (
                         <div className="d-flex flex-column text-end" style={{ marginTop: '-0.75rem' }}>
@@ -63,7 +67,7 @@ function TheCollection() {
                 <VariantFilter searchTerm={searchTerm} setSearchTerm={setSearchTerm} filterCount={filterCount} />
                 <VariantGallery cards={cards} loading={loading} error={error} searchTerm={searchTerm} setFilterCount={setFilterCount} />
             </div>
-            <CreditsModal />
+            <CreditsModal open={creditsOpen} close={closeCreditsModal} />
         </>
     );
 }

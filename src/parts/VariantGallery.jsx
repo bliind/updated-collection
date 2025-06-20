@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import VariantCard from "./VariantCard";
 import PlaceholderCard from "./PlaceholderCard";
 import VideoModal from "./VideoModal";
 
 function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
     const [modalCard, setModalCard] = useState('');
+    const [modalOpen, setModalOpen] = useState(false);
 
     const sanitizeText = (text) => {
         try {
@@ -36,6 +37,11 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
         setFilterCount(filteredCards.length);
     }, [filteredCards, setFilterCount]);
 
+    const openModal = useCallback((card) => {
+        setModalCard(card);
+        setModalOpen(true);
+    }, [setModalCard, setModalOpen]);
+
     return (
         <>
             <div className="d-flex flex-wrap w-100 ms-auto justify-content-center align-items-center pt-1 overflow-auto">
@@ -45,11 +51,11 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
                     <p className="text-danger">Error: {error}</p>
                 ) :
                     filteredCards.map((card) => (
-                        <VariantCard key={card.id} card={card} setModalCard={setModalCard} />
+                        <VariantCard key={card.id} card={card} openModal={openModal} />
                     )
                 )}
             </div>
-            <VideoModal card={modalCard} />
+            <VideoModal card={modalCard} open={modalOpen} setOpen={setModalOpen} />
         </>
     );
 }

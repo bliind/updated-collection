@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const VariantCard = React.memo(({ card, setModalCard }) => {
+const VariantCard = React.memo(({ card, openModal }) => {
     const imgSrc = `https://snaptracker.me/collection/images/${card.image_link}`
     const badgeStyle = 'position-absolute badge rounded-pill border card-text p-2';
 
@@ -19,7 +19,7 @@ const VariantCard = React.memo(({ card, setModalCard }) => {
         <div className="m-2 align-self-start">
             <div
                 className="card text-center position-relative variant-card"
-                onClick={() => setModalCard(card)}
+                onClick={() => openModal(card)}
                 data-bs-toggle="modal"
                 data-bs-target="#mainModal"
             >
