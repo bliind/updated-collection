@@ -5,7 +5,7 @@ import { Modal } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 
-function VideoModal({ card, open, setOpen }) {
+function VideoModal({ card, open, close }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -35,10 +35,8 @@ function VideoModal({ card, open, setOpen }) {
         setError('Failed to load video. It might be missing.');
     }
 
-    const handleClose = useCallback(() => setOpen(false));
-
     return (
-        <Modal show={open} centered size="lg" onHide={handleClose} onClick={handleClose}>
+        <Modal show={open} centered size="lg" onHide={close} onClick={close}>
             <Modal.Title className="py-2 text-center flex-column rounded">
                 <h5 className="py-1 my-0">{card.variant_name !== card.artist_name && card.variant_name} {card.card_name}</h5>
                 {card.tags && (

@@ -41,7 +41,7 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
         setModalCard(card);
         setModalOpen(true);
     }, [setModalCard, setModalOpen]);
-
+    const closeModal = useCallback(() => setModalOpen(false))
     return (
         <>
             <div className="d-flex flex-wrap w-100 ms-auto justify-content-center align-items-center pt-1 overflow-auto">
@@ -55,7 +55,7 @@ function VariantGallery({ cards, loading, error, searchTerm, setFilterCount }) {
                     )
                 )}
             </div>
-            <VideoModal card={modalCard} open={modalOpen} setOpen={setModalOpen} />
+            <VideoModal card={modalCard} open={modalOpen} close={closeModal} />
         </>
     );
 }
