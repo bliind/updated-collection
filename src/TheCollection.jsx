@@ -1,47 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { getCollection } from "./api/collection";
 import VariantFilter from "./parts/VariantFilter";
 import VariantGallery from "./parts/VariantGallery";
 import CreditsModal from "./parts/CreditsModal";
 import { useUser } from "./hooks/useUser";
 import { Link } from "react-router";
 
-function TheCollection() {
-    // variant loading
-    const [cards, setCards] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+function TheCollection({cards, loading, error}) {
     const [creditsOpen, setCreditsOpen] = useState(false);
-    const fetched = useRef(false);
 
     // filtering
     const [searchTerm, setSearchTerm] = useState('');
     const [filterCount, setFilterCount] = useState(0);
 
     const {username} = useUser();
-
-    // fetch the data
-    useEffect(() => {
-        const fetchCollection = async () => {
-            if (fetched.current) return;
-
-            setLoading(true);
-            setError(null);
-            try {
-                const data = await getCollection();
-                data.sort((a, b) => a.card_name.localeCompare(b.card_name))
-                setCards(data);
-            } catch(err) {
-                setError(err.message || 'Failed to fetch variants');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchCollection();
-        fetched.current = true;
-    }, []);
-
 
     const linkClass = 'link-light link-underline link-underline-opacity-0 link-underline-opacity-75-hover';
 

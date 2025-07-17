@@ -8,7 +8,9 @@ function TextField({ name, label, value, onChange, fieldErrors, loading }) {
                 id={name}
                 value={value === null ? '' : value}
                 onChange={onChange}
-                disabled={loading} />
+                disabled={loading}
+                autoComplete="off"
+                list={`${name}_suggestions`} />
         </div>
     )
 }

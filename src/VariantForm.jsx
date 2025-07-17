@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import TextField from "./parts/form/TextField";
 import FormControls from "./parts/form/FormControls";
 
-function VariantForm() {
+function VariantForm({cardNames, variantNames, artistNames, tagNames}) {
     const [cardName, setCardName] = useState('');
     const [variantName, setVariantName] = useState('');
     const [artistName, setArtistName] = useState('');
@@ -147,10 +147,19 @@ function VariantForm() {
                     <form onSubmit={handleSubmit}>
                         <TextField name="card_name" label="Card Name" value={cardName} fieldErrors={fieldErrors}
                             onChange={(event) => setCardName(event.target.value)} loading={loading} />
+                        <datalist id="card_name_suggestions">
+                            {cardNames.map((name) => <option key={name} value={name} />)}
+                        </datalist>
                         <TextField name="variant_name" label="Variant Name" value={variantName} fieldErrors={fieldErrors}
                             onChange={(event) => setVariantName(event.target.value)} loading={loading} />
+                        <datalist id="variant_name_suggestions">
+                            {variantNames.map((name) => <option key={name} value={name} />)}
+                        </datalist>
                         <TextField name="artist_name" label="Artist Name" value={artistName} fieldErrors={fieldErrors}
                             onChange={(event) => setArtistName(event.target.value)} loading={loading} />
+                        <datalist id="artist_name_suggestions">
+                            {artistNames.map((name) => <option key={name} value={name} />)}
+                        </datalist>
 
                         <div className="form-group pt-3">
                             <label className="form-label">Card Image</label>
@@ -174,6 +183,9 @@ function VariantForm() {
                             onChange={(event) => setVideoLink(event.target.value)} loading={loading} />
                         <TextField name="tags" label="Tags" value={tags} fieldErrors={fieldErrors}
                             onChange={(event) => setTags(event.target.value)} loading={loading} />
+                        <datalist id="tags_suggestions">
+                            {tagNames.map((name) => <option key={name} value={name} />)}
+                        </datalist>
 
                         <input type="checkbox" id="add-another" checked={addAnother} onChange={(event) => setAddAnother(event.target.checked)} />
                         <label htmlFor="add-another">&nbsp;Add Another</label>
