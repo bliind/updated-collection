@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import TextField from "./parts/form/TextField";
 import FormControls from "./parts/form/FormControls";
 
-function VariantForm({cardNames, variantNames, artistNames, tagNames}) {
+function VariantForm({cardNames = [], variantNames = [], artistNames = [], tagNames = [], onVariantAdded}) {
     const [cardName, setCardName] = useState('');
     const [variantName, setVariantName] = useState('');
     const [artistName, setArtistName] = useState('');
@@ -53,7 +53,7 @@ function VariantForm({cardNames, variantNames, artistNames, tagNames}) {
         }
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
         setFieldErrors((prev) => [])
@@ -79,18 +79,30 @@ function VariantForm({cardNames, variantNames, artistNames, tagNames}) {
             url = `https://snaptracker.me/collection/api/update/${id}`;
         }
 
-        fetch(url, {
-            'method': 'POST',
-            'body': formData
-        })
-        .then(res => res.json())
-        .then(data => {
+        try {
+            const res = await fetch(url, {
+                'method': 'POST',
+                'body': formData
+            });
+
+            if (!res.ok) {
+                console.error(`VariantForm: HTTP error! status: ${res.status} from ${url}`);
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+
+            const data = await res.json();
+
             if (typeof data['error'] !== 'undefined') {
+                console.error("VariantForm: API returned a specific error:", data['error']);
                 const match = /(\w+) is required/.exec(data['error']);
                 if (match) {
                     setFieldErrors(prevFields => [...prevFields, match[1]])
                 }
             } else {
+                if (onVariantAdded) {
+                    onVariantAdded();
+                }
+
                 // success
                 if (addAnother) {
                     resetForm();
@@ -98,8 +110,11 @@ function VariantForm({cardNames, variantNames, artistNames, tagNames}) {
                     navigate('/collection/');
                 }
             }
-        })
-        .finally(() => setLoading(false));
+        } catch (error) {
+            setFieldErrors(prevFields => [...prevFields, 'submission_failed']);
+        } finally {
+            setLoading(false)
+        }
     };
 
     useEffect(() => {
