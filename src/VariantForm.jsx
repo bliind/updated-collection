@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUser } from "./hooks/useUser";
 import { Link, useNavigate, useParams } from "react-router";
 import TextField from "./parts/form/TextField";
@@ -12,6 +12,9 @@ function VariantForm() {
     const [image, setImage] = useState(null);
     const [videoLink, setVideoLink] = useState('');
     const [tags, setTags] = useState('');
+
+    const [addAnother, setAddAnother] = useState(false);
+    const fileInputRef = useRef(null);
 
     const [loading, setLoading] = useState(false);
     const [fieldErrors, setFieldErrors] = useState([]);
@@ -44,7 +47,10 @@ function VariantForm() {
         setImage(null);
         setVideoLink('');
         setTags('');
-        setFieldErrors((prev) => [])
+        setFieldErrors((prev) => []);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
     };
 
     const handleSubmit = (event) => {
@@ -86,7 +92,11 @@ function VariantForm() {
                 }
             } else {
                 // success
-                navigate('/collection/')
+                if (addAnother) {
+                    resetForm();
+                } else {
+                    navigate('/collection/');
+                }
             }
         })
         .finally(() => setLoading(false));
@@ -149,7 +159,8 @@ function VariantForm() {
                                 name="upload_image"
                                 id="upload_image"
                                 onChange={handleFileChange}
-                                disabled={loading} />
+                                disabled={loading}
+                                ref={fileInputRef} />
                             {image && (
                                 <div className="text-center py-1">
                                     <img src={URL.createObjectURL(image)} style={{ width: '12rem' }} />
@@ -163,6 +174,9 @@ function VariantForm() {
                             onChange={(event) => setVideoLink(event.target.value)} loading={loading} />
                         <TextField name="tags" label="Tags" value={tags} fieldErrors={fieldErrors}
                             onChange={(event) => setTags(event.target.value)} loading={loading} />
+
+                        <input type="checkbox" id="add-another" checked={addAnother} onChange={(event) => setAddAnother(event.target.checked)} />
+                        <label htmlFor="add-another">&nbsp;Add Another</label>
 
                         <FormControls loading={loading} resetForm={resetForm} handleSubmit={handleSubmit}
                             label={(id ? 'Edit' : 'Add') + ' Variant'} />
